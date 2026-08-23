@@ -30,14 +30,22 @@ TAREAS = ("nivel", "magnitud")
 # ---------------------------------------------------------------------------
 @dataclass(frozen=True)
 class Particion:
-    """Fechas de corte. Todo lo anterior a `fin_entrena` es entrenamiento."""
+    """Fechas de corte. Todo lo anterior a `fin_entrena` es entrenamiento.
+
+    `fin_prueba` acota el tramo de prueba por la derecha. Es opcional porque
+    con una particion unica la prueba llega hasta el final de los datos, pero
+    hace falta con origen movil, donde cada origen evalua sobre una ventana
+    de longitud fija.
+    """
 
     fin_entrena: pd.Timestamp
     fin_valida: pd.Timestamp
+    fin_prueba: pd.Timestamp | None = None
 
     def __repr__(self) -> str:  # pragma: no cover - solo presentacion
+        fin = "" if self.fin_prueba is None else f" < {self.fin_prueba.date()}"
         return (f"Particion(entrena < {self.fin_entrena.date()} "
-                f"<= valida < {self.fin_valida.date()} <= prueba)")
+                f"<= valida < {self.fin_valida.date()} <= prueba{fin})")
 
 
 def particion_cronologica(fechas: pd.DatetimeIndex,
@@ -190,6 +198,8 @@ def reparte(muestras: Muestras, particion: Particion, H: int
     ent = origen < (fin_e - margen)
     val = (origen >= fin_e) & (origen < (fin_v - margen))
     pru = origen >= fin_v
+    if particion.fin_prueba is not None:
+        pru &= origen < (particion.fin_prueba - margen)
 
     return {"entrena": muestras.subconjunto(ent),
             "valida": muestras.subconjunto(val),
