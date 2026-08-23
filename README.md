@@ -43,6 +43,10 @@ Los datos **no se incluyen en el repositorio**: se reconstruyen ejecutando el m�
 
 **Caché en disco.** El backend de Yahoo Finance ha cambiado varias veces y `yfinance` sufre roturas periódicas. La versión está fijada en `requirements.txt` y los datos descargados se guardan en parquet, de modo que el análisis pueda rehacerse sin red.
 
+**Partición cronológica con margen.** Una ventana se asigna a un tramo por la fecha de su último paso de entrada, y se descartan además las que alcanzarían con su salida el tramo siguiente. Sin esa segunda condición hay fuga: el modelo se entrenaría con objetivos que caen dentro del periodo de validación. `tests/test_ventanas.py` lo comprueba explícitamente.
+
+**Escala estimada solo con entrenamiento, y constante por serie.** Estimarla sobre la muestra completa filtraría información del futuro. Y se usa una escala por serie en lugar de una por ventana porque normalizar cada ventana por su propia volatilidad destruiría justo la señal que la segunda tarea pretende predecir.
+
 **El horizonte de predicción se reporta, no se ajusta.** Cambiar el horizonte no cambia el modelo: cambia el problema. Probar varios y comunicar el mejor sería elegir la pregunta que mejor se responde. Se fija una rejilla de antemano y se publican todos los resultados.
 
 ## Estado
@@ -50,7 +54,7 @@ Los datos **no se incluyen en el repositorio**: se reconstruyen ejecutando el m�
 | Etapa | |
 |---|---|
 | Datos | ✅ |
-| Ventanas y partición | en curso |
+| Ventanas y partición | ✅ |
 | Líneas base y métrica | |
 | Modelo | |
 | Evaluación | |

@@ -18,6 +18,7 @@
 !/README.md
 !/requirements.txt
 !/src/
+!/tests/
 !/notebooks/
 
 # 3. Y dentro de lo habilitado, excluir lo generado
