@@ -1,0 +1,26 @@
+# =====================================================================
+#  LISTA BLANCA: se ignora TODO por defecto y solo se publica lo que se
+#  habilita expresamente abajo.
+#
+#  Motivo: el directorio de trabajo contiene bibliografia con derechos de
+#  autor (libros de Bishop y de Goodfellow, articulos de JSTOR, Wiley,
+#  Elsevier y Springer) y el TFG de otra persona. Nada de eso puede
+#  publicarse. Con una lista negra, cualquier despiste al anadir un
+#  fichero nuevo lo publicaria; con lista blanca, lo nuevo queda fuera
+#  hasta que se habilite a proposito.
+# =====================================================================
+
+# 1. Ignorar todo lo que cuelga de la raiz
+/*
+
+# 2. Habilitar solo lo que es codigo propio o metadatos del repositorio
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/src/
+!/notebooks/
+
+# 3. Y dentro de lo habilitado, excluir lo generado
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
