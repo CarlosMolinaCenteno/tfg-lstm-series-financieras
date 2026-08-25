@@ -22,6 +22,41 @@ def comprueba(nombre, condicion, detalle=""):
         FALLOS.append(nombre)
 
 
+def prueba_rejilla_completa():
+    """Ejecuta `ejecuta_rejilla` de verdad, con dos origenes y verboso.
+
+    Existe por un fallo concreto: el bloque que imprime el progreso al
+    terminar cada origen usaba `_t` y `_inicio` sin haberlos definido, de modo
+    que **cualquier ejecucion real moria al completar el primer origen**. No
+    lo detecto ninguna comprobacion porque todas ejercitaban las piezas por
+    separado; ninguna llamaba a la funcion que las orquesta.
+
+    La leccion es que las piezas verificadas una a una no garantizan que el
+    conjunto funcione. Esta prueba es lenta -- entrena de verdad -- pero es
+    barata comparada con descubrirlo en una ejecucion de cuatro horas.
+    """
+    import pandas as pd
+    from tfg import evaluacion as Ev
+
+    rng = np.random.default_rng(0)
+    fechas = pd.bdate_range("2018-01-01", periods=900)
+    panel = pd.DataFrame(rng.normal(0, 0.01, (900, 4)), index=fechas,
+                         columns=[f"S{i}" for i in range(4)])
+
+    from tfg import modelo as Mo
+    cfg = Mo.Config(unidades=4, epocas_max=2, paciencia=1)
+    tabla = Ev.ejecuta_rejilla(panel, horizontes=(2,), K=10, semillas=(0,),
+                               n_origenes=2, dias_prueba=60, cfg=cfg,
+                               paso_entrena=10, verboso=True)
+
+    comprueba("ejecuta_rejilla completa varios origenes en modo verboso",
+              len(tabla) > 0 and tabla["origen"].nunique() == 2,
+              f"{len(tabla)} filas, {tabla['origen'].nunique()} origenes")
+    comprueba("la rejilla no deja huecos",
+              not tabla["mase_rel_medio"].isna().any())
+    return tabla
+
+
 def main():
     print("ETAPA 5 — comprobaciones\n")
     fechas = pd.bdate_range("2015-01-01", periods=1500)
@@ -70,6 +105,10 @@ def main():
               f["p"] < 0.01 and f["k_metodos"] == 3, f"p={f['p']:.1e}")
 
     print()
+    print("  --- prueba de integracion (entrena de verdad, tarda ~1 min) ---")
+    prueba_rejilla_completa()
+
+    print()
     if FALLOS:
         print(f"FALLAN {len(FALLOS)}: " + ", ".join(FALLOS))
         return 1
@@ -79,3 +118,5 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+

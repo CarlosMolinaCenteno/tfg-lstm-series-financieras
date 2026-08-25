@@ -22,6 +22,13 @@
 !/tests/
 !/notebooks/
 
+# 2b. Salidas del experimento: son numeros, pesan poco y hacen el
+#     repositorio reproducible. Los datos crudos siguen fuera.
+!/resultados/
+/resultados/*
+!/resultados/*.csv
+!/ejecucion.log
+
 # 3. Y dentro de lo habilitado, excluir lo generado
 __pycache__/
 *.py[cod]
