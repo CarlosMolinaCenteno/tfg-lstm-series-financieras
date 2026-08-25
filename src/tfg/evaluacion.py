@@ -120,8 +120,9 @@ def ejecuta_rejilla(rendimientos: pd.DataFrame, horizontes: tuple[int, ...],
     filas = []
 
     for i_org, part in enumerate(particiones):
-        norm = V.normaliza(rendimientos,
-                           V.escala_por_serie(rendimientos, part))
+        utiles = V.series_utilizables(rendimientos, part)
+        panel = rendimientos[utiles]
+        norm = V.normaliza(panel, V.escala_por_serie(panel, part))
         for tarea in tareas:
             preds = (B.PREDICTORES_NIVEL if tarea == "nivel"
                      else B.PREDICTORES_MAGNITUD)

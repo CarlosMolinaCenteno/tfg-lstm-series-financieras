@@ -152,6 +152,9 @@ def universo_historico(refrescar: bool = False) -> pd.DataFrame:
     respuesta = requests.get(URL_UNIVERSO, headers=CABECERA, timeout=60)
     respuesta.raise_for_status()
     df = pd.read_csv(io.StringIO(respuesta.text), parse_dates=["start_date", "end_date"])
+    # Yahoo escribe las clases de accion con guion y no con punto: BRK.B es
+    # BRK-B. Sin esta conversion esos tickers se descargan vacios.
+    df["ticker"] = df["ticker"].str.replace(".", "-", regex=False)
     df.to_parquet(destino)
     return df
 

@@ -67,6 +67,25 @@ def particion_cronologica(fechas: pd.DatetimeIndex,
 # ---------------------------------------------------------------------------
 # Normalizacion
 # ---------------------------------------------------------------------------
+def series_utilizables(rendimientos: pd.DataFrame, particion: Particion,
+                       min_obs: int = 252) -> list[str]:
+    """Series con suficientes observaciones en el tramo de entrenamiento.
+
+    Pertenecer al indice de forma continua **no garantiza tener cotizacion
+    continua**: hay escisiones, reasignaciones de ticker y exclusiones
+    temporales. En el panel completo aparecen tres casos -- una serie con una
+    sola observacion valida, y dos que empiezan a mitad del periodo porque la
+    empresa no existia con esa forma antes.
+
+    Se filtra por origen y no de una vez, porque el tramo de entrenamiento
+    crece con el origen: una serie inservible en el primero puede ser
+    perfectamente utilizable en el ultimo.
+    """
+    tramo = rendimientos.loc[rendimientos.index < particion.fin_entrena]
+    validas = tramo.notna().sum()
+    return validas[validas >= min_obs].index.tolist()
+
+
 def escala_por_serie(rendimientos: pd.DataFrame,
                      particion: Particion) -> pd.Series:
     """Desviacion tipica de cada serie, calculada **solo con entrenamiento**.
@@ -148,35 +167,54 @@ def construye_ventanas(rendimientos: pd.DataFrame, K: int, H: int,
     comparacion entre ellas es limpia.
 
     Cada desplazamiento de la ventana genera una muestra nueva, lo que actua
-    ademas como mecanismo de aumento de datos.
+    ademas como mecanismo de aumento de datos. `paso` permite submuestrear:
+    con ventanas solapadas de longitud K, dos consecutivas comparten K-1
+    valores, de modo que la informacion que anade cada una es escasa y el
+    coste de entrenamiento crece linealmente con su numero.
+
+    Implementacion vectorizada por serie. La version ingenua, que acumulaba
+    las ventanas en una lista de Python, agota la memoria con el panel
+    completo: 275 series por 3665 fechas dan del orden de un millon de
+    ventanas.
     """
     if K < 1 or H < 1:
         raise ValueError("K y H deben ser positivos")
+    if paso < 1:
+        raise ValueError("el paso debe ser positivo")
 
+    ancho = K + H
     fechas = rendimientos.index
     Xs, ys, tks, ors = [], [], [], []
 
     for tk in rendimientos.columns:
-        serie = rendimientos[tk]
-        valido = serie.notna().to_numpy()
-        v = serie.to_numpy(dtype=float)
+        v = rendimientos[tk].to_numpy(dtype=np.float32)
+        if len(v) < ancho:
+            continue
 
-        for ini in range(0, len(v) - K - H + 1, paso):
-            corte = slice(ini, ini + K + H)
-            if not valido[corte].all():
-                continue          # se descarta la ventana con huecos
-            Xs.append(v[ini:ini + K])
-            ys.append(_objetivo(v[ini + K:ini + K + H], tarea))
-            tks.append(tk)
-            ors.append(fechas[ini + K - 1])
+        bloques = np.lib.stride_tricks.sliding_window_view(v, ancho)[::paso]
+        if not len(bloques):
+            continue
+
+        # Se descartan las ventanas que contienen algun hueco.
+        completas = ~np.isnan(bloques).any(axis=1)
+        if not completas.any():
+            continue
+        bloques = bloques[completas]
+
+        inicios = np.arange(0, len(v) - ancho + 1, paso)[completas]
+
+        Xs.append(bloques[:, :K].copy())
+        ys.append(_objetivo(bloques[:, K:], tarea).copy())
+        tks.append(np.full(len(bloques), tk))
+        ors.append(fechas.to_numpy()[inicios + K - 1])
 
     if not Xs:
         raise ValueError("ninguna ventana valida; revise K, H y los huecos")
 
-    return Muestras(X=np.asarray(Xs, dtype=np.float32),
-                    y=np.asarray(ys, dtype=np.float32),
-                    ticker=np.asarray(tks),
-                    origen=np.asarray(ors, dtype="datetime64[ns]"))
+    return Muestras(X=np.concatenate(Xs),
+                    y=np.concatenate(ys),
+                    ticker=np.concatenate(tks),
+                    origen=np.concatenate(ors).astype("datetime64[ns]"))
 
 
 def reparte(muestras: Muestras, particion: Particion, H: int

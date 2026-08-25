@@ -24,7 +24,8 @@ def lineas_base(rendimientos: pd.DataFrame, K: int, H: int, tarea: str,
     """
     if particion is None:
         particion = V.particion_cronologica(rendimientos.index)
-    norm = V.normaliza(rendimientos, V.escala_por_serie(rendimientos, particion))
+    panel = rendimientos[V.series_utilizables(rendimientos, particion)]
+    norm = V.normaliza(panel, V.escala_por_serie(panel, particion))
 
     muestras = V.construye_ventanas(norm, K, H, tarea)
     trozos = V.reparte(muestras, particion, H)
