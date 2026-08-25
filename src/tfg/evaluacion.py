@@ -104,7 +104,8 @@ def ejecuta_rejilla(rendimientos: pd.DataFrame, horizontes: tuple[int, ...],
                     K: int, tareas: tuple[str, ...] = ("nivel", "magnitud"),
                     semillas: tuple[int, ...] = (0, 1, 2),
                     n_origenes: int = 4, dias_prueba: int = 126,
-                    cfg=None, verboso: bool = True) -> pd.DataFrame:
+                    cfg=None, paso_entrena: int = 1,
+                    verboso: bool = True) -> pd.DataFrame:
     """Entrena y evalua en toda la rejilla origen x horizonte x tarea x semilla.
 
     Devuelve una fila por combinacion, con el MASE de cada metodo y el
@@ -128,7 +129,11 @@ def ejecuta_rejilla(rendimientos: pd.DataFrame, horizontes: tuple[int, ...],
                      else B.PREDICTORES_MAGNITUD)
             ref = REFERENCIA[tarea]
             for H in horizontes:
-                muestras = V.construye_ventanas(norm, K, H, tarea)
+                # El submuestreo se aplica a todo por coherencia: entrenar
+                # con una de cada `paso` ventanas y evaluar con todas mezclaria
+                # dos regimenes de muestreo distintos en la misma tabla.
+                muestras = V.construye_ventanas(norm, K, H, tarea,
+                                                paso=paso_entrena)
                 tr = V.reparte(muestras, part, H)
                 ent, val, pru = tr["entrena"], tr["valida"], tr["prueba"]
                 if len(ent) == 0 or len(val) == 0 or len(pru) == 0:
