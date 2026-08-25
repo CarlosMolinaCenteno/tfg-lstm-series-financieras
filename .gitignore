@@ -16,6 +16,7 @@
 # 2. Habilitar solo lo que es codigo propio o metadatos del repositorio
 !/.gitignore
 !/README.md
+!/EJECUTAR.md
 !/requirements.txt
 !/src/
 !/tests/

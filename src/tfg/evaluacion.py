@@ -105,7 +105,7 @@ def ejecuta_rejilla(rendimientos: pd.DataFrame, horizontes: tuple[int, ...],
                     semillas: tuple[int, ...] = (0, 1, 2),
                     n_origenes: int = 4, dias_prueba: int = 126,
                     cfg=None, paso_entrena: int = 1,
-                    verboso: bool = True) -> pd.DataFrame:
+                    guarda_en=None, verboso: bool = True) -> pd.DataFrame:
     """Entrena y evalua en toda la rejilla origen x horizonte x tarea x semilla.
 
     Devuelve una fila por combinacion, con el MASE de cada metodo y el
@@ -172,7 +172,17 @@ def ejecuta_rejilla(rendimientos: pd.DataFrame, horizontes: tuple[int, ...],
                 if verboso:
                     ult = filas[-1]
                     print(f"  origen {i_org} | {tarea:9s} | H={H:2d} | "
-                          f"LSTM rel {ult['mase_rel_medio']:.4f}")
+                          f"LSTM rel {ult['mase_rel_medio']:.4f}", flush=True)
+
+        if guarda_en is not None:
+            pd.DataFrame(filas).to_csv(guarda_en, index=False)
+        if verboso:
+            hechos, total = i_org + 1, len(particiones)
+            transcurrido = (_t.time() - _inicio) / 60
+            resto = transcurrido / hechos * (total - hechos)
+            print(f"  -- origen {hechos}/{total} completo | "
+                  f"{transcurrido:.0f} min transcurridos | "
+                  f"quedan ~{resto:.0f} min --", flush=True)
 
     return pd.DataFrame(filas)
 

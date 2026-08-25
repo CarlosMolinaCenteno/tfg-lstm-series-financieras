@@ -24,6 +24,33 @@ RAIZ = Path(__file__).resolve().parents[1]
 INICIO, FIN = "2012-01-03", "2026-08-01"
 
 
+def _entorno() -> str:
+    """Resumen del equipo, para que quede en el registro de la ejecucion."""
+    import ctypes
+    import platform
+    import torch
+
+    class _MS(ctypes.Structure):
+        _fields_ = [("l", ctypes.c_ulong), ("m", ctypes.c_ulong),
+                    ("tp", ctypes.c_ulonglong), ("ap", ctypes.c_ulonglong),
+                    ("tpf", ctypes.c_ulonglong), ("apf", ctypes.c_ulonglong),
+                    ("tv", ctypes.c_ulonglong), ("av", ctypes.c_ulonglong),
+                    ("ae", ctypes.c_ulonglong)]
+
+    ram = "desconocida"
+    try:
+        if platform.system() == "Windows":
+            e = _MS()
+            e.l = ctypes.sizeof(_MS)
+            ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(e))
+            ram = f"{e.tp / 2**30:.1f} GB totales, {e.ap / 2**30:.1f} libres"
+    except Exception:
+        pass
+    return (f"equipo: {platform.system()} {platform.machine()} | "
+            f"python {platform.python_version()} | torch {torch.__version__} | "
+            f"{torch.get_num_threads()} hilos | RAM {ram}")
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--origenes", type=int, default=12)
@@ -35,6 +62,10 @@ def main() -> int:
     p.add_argument("--salida", type=str, default="rejilla_definitiva.csv")
     a = p.parse_args()
 
+    destino = RAIZ / "resultados" / a.salida
+    destino.parent.mkdir(parents=True, exist_ok=True)
+
+    print(_entorno(), flush=True)
     t0 = time.time()
     print(f"universo {INICIO} a {FIN}", flush=True)
     tk = datos.miembros_durante(INICIO, FIN)
@@ -46,10 +77,8 @@ def main() -> int:
         r, horizontes=(1, 5, 10, 20), K=a.K,
         semillas=tuple(range(a.semillas)),
         n_origenes=a.origenes, dias_prueba=126,
-        cfg=cfg, paso_entrena=a.paso)
+        cfg=cfg, paso_entrena=a.paso, guarda_en=destino)
 
-    destino = RAIZ / "resultados" / a.salida
-    destino.parent.mkdir(parents=True, exist_ok=True)
     tabla.to_csv(destino, index=False)
     print(f"\nguardado en {destino}  ({len(tabla)} filas)")
     print(f"tiempo total {(time.time() - t0) / 3600:.2f} h")
