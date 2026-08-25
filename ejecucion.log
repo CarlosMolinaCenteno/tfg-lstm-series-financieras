@@ -1,0 +1,114 @@
+﻿equipo: Windows AMD64 | python 3.12.10 | torch 2.13.0+cpu | 8 hilos | RAM 15.4 GB totales, 5.7 libres
+universo 2012-01-03 a 2026-08-01
+panel: 3664 fechas x 275 series
+  origen 0 | nivel     | H= 1 | LSTM rel 0.9967
+  origen 0 | nivel     | H= 5 | LSTM rel 1.0003
+  origen 0 | nivel     | H=10 | LSTM rel 0.9993
+  origen 0 | nivel     | H=20 | LSTM rel 0.9971
+  origen 0 | magnitud  | H= 1 | LSTM rel 0.9109
+  origen 0 | magnitud  | H= 5 | LSTM rel 0.9235
+  origen 0 | magnitud  | H=10 | LSTM rel 0.9259
+  origen 0 | magnitud  | H=20 | LSTM rel 0.9266
+  -- origen 1/12 completo | 16 min transcurridos | quedan ~174 min --
+  origen 1 | nivel     | H= 1 | LSTM rel 0.9872
+  origen 1 | nivel     | H= 5 | LSTM rel 0.9988
+  origen 1 | nivel     | H=10 | LSTM rel 0.9971
+  origen 1 | nivel     | H=20 | LSTM rel 0.9981
+  origen 1 | magnitud  | H= 1 | LSTM rel 0.9442
+  origen 1 | magnitud  | H= 5 | LSTM rel 0.9472
+  origen 1 | magnitud  | H=10 | LSTM rel 0.9375
+  origen 1 | magnitud  | H=20 | LSTM rel 0.9271
+  -- origen 2/12 completo | 29 min transcurridos | quedan ~145 min --
+  origen 2 | nivel     | H= 1 | LSTM rel 0.9826
+  origen 2 | nivel     | H= 5 | LSTM rel 0.9963
+  origen 2 | nivel     | H=10 | LSTM rel 0.9965
+  origen 2 | nivel     | H=20 | LSTM rel 0.9967
+  origen 2 | magnitud  | H= 1 | LSTM rel 0.9539
+  origen 2 | magnitud  | H= 5 | LSTM rel 0.9734
+  origen 2 | magnitud  | H=10 | LSTM rel 0.9762
+  origen 2 | magnitud  | H=20 | LSTM rel 0.9781
+  -- origen 3/12 completo | 45 min transcurridos | quedan ~136 min --
+  origen 3 | nivel     | H= 1 | LSTM rel 1.0559
+  origen 3 | nivel     | H= 5 | LSTM rel 1.0102
+  origen 3 | nivel     | H=10 | LSTM rel 1.0055
+  origen 3 | nivel     | H=20 | LSTM rel 1.0041
+  origen 3 | magnitud  | H= 1 | LSTM rel 1.0284
+  origen 3 | magnitud  | H= 5 | LSTM rel 0.9837
+  origen 3 | magnitud  | H=10 | LSTM rel 0.9908
+  origen 3 | magnitud  | H=20 | LSTM rel 1.0038
+  -- origen 4/12 completo | 62 min transcurridos | quedan ~124 min --
+  origen 4 | nivel     | H= 1 | LSTM rel 0.9963
+  origen 4 | nivel     | H= 5 | LSTM rel 1.0074
+  origen 4 | nivel     | H=10 | LSTM rel 1.0018
+  origen 4 | nivel     | H=20 | LSTM rel 1.0037
+  origen 4 | magnitud  | H= 1 | LSTM rel 0.9680
+  origen 4 | magnitud  | H= 5 | LSTM rel 0.9343
+  origen 4 | magnitud  | H=10 | LSTM rel 0.9342
+  origen 4 | magnitud  | H=20 | LSTM rel 0.9387
+  -- origen 5/12 completo | 75 min transcurridos | quedan ~105 min --
+  origen 5 | nivel     | H= 1 | LSTM rel 1.0038
+  origen 5 | nivel     | H= 5 | LSTM rel 1.0046
+  origen 5 | nivel     | H=10 | LSTM rel 1.0059
+  origen 5 | nivel     | H=20 | LSTM rel 1.0046
+  origen 5 | magnitud  | H= 1 | LSTM rel 0.9731
+  origen 5 | magnitud  | H= 5 | LSTM rel 0.9490
+  origen 5 | magnitud  | H=10 | LSTM rel 0.9453
+  origen 5 | magnitud  | H=20 | LSTM rel 0.9432
+  -- origen 6/12 completo | 95 min transcurridos | quedan ~95 min --
+  origen 6 | nivel     | H= 1 | LSTM rel 0.9929
+  origen 6 | nivel     | H= 5 | LSTM rel 1.0033
+  origen 6 | nivel     | H=10 | LSTM rel 1.0026
+  origen 6 | nivel     | H=20 | LSTM rel 1.0025
+  origen 6 | magnitud  | H= 1 | LSTM rel 0.9637
+  origen 6 | magnitud  | H= 5 | LSTM rel 0.9450
+  origen 6 | magnitud  | H=10 | LSTM rel 0.9426
+  origen 6 | magnitud  | H=20 | LSTM rel 0.9477
+  -- origen 7/12 completo | 112 min transcurridos | quedan ~80 min --
+  origen 7 | nivel     | H= 1 | LSTM rel 1.0005
+  origen 7 | nivel     | H= 5 | LSTM rel 1.0005
+  origen 7 | nivel     | H=10 | LSTM rel 1.0000
+  origen 7 | nivel     | H=20 | LSTM rel 0.9986
+  origen 7 | magnitud  | H= 1 | LSTM rel 0.9569
+  origen 7 | magnitud  | H= 5 | LSTM rel 0.9672
+  origen 7 | magnitud  | H=10 | LSTM rel 0.9611
+  origen 7 | magnitud  | H=20 | LSTM rel 0.9604
+  -- origen 8/12 completo | 132 min transcurridos | quedan ~66 min --
+  origen 8 | nivel     | H= 1 | LSTM rel 1.0058
+  origen 8 | nivel     | H= 5 | LSTM rel 1.0007
+  origen 8 | nivel     | H=10 | LSTM rel 1.0018
+  origen 8 | nivel     | H=20 | LSTM rel 1.0025
+  origen 8 | magnitud  | H= 1 | LSTM rel 0.9658
+  origen 8 | magnitud  | H= 5 | LSTM rel 0.9391
+  origen 8 | magnitud  | H=10 | LSTM rel 0.9370
+  origen 8 | magnitud  | H=20 | LSTM rel 0.9336
+  -- origen 9/12 completo | 158 min transcurridos | quedan ~53 min --
+  origen 9 | nivel     | H= 1 | LSTM rel 0.9744
+  origen 9 | nivel     | H= 5 | LSTM rel 0.9935
+  origen 9 | nivel     | H=10 | LSTM rel 0.9938
+  origen 9 | nivel     | H=20 | LSTM rel 0.9958
+  origen 9 | magnitud  | H= 1 | LSTM rel 0.9285
+  origen 9 | magnitud  | H= 5 | LSTM rel 0.9122
+  origen 9 | magnitud  | H=10 | LSTM rel 0.9150
+  origen 9 | magnitud  | H=20 | LSTM rel 0.9114
+  -- origen 10/12 completo | 181 min transcurridos | quedan ~36 min --
+  origen 10 | nivel     | H= 1 | LSTM rel 1.0071
+  origen 10 | nivel     | H= 5 | LSTM rel 1.0005
+  origen 10 | nivel     | H=10 | LSTM rel 0.9996
+  origen 10 | nivel     | H=20 | LSTM rel 1.0003
+  origen 10 | magnitud  | H= 1 | LSTM rel 0.9647
+  origen 10 | magnitud  | H= 5 | LSTM rel 0.9583
+  origen 10 | magnitud  | H=10 | LSTM rel 0.9587
+  origen 10 | magnitud  | H=20 | LSTM rel 0.9557
+  -- origen 11/12 completo | 201 min transcurridos | quedan ~18 min --
+  origen 11 | nivel     | H= 1 | LSTM rel 1.0002
+  origen 11 | nivel     | H= 5 | LSTM rel 0.9999
+  origen 11 | nivel     | H=10 | LSTM rel 1.0019
+  origen 11 | nivel     | H=20 | LSTM rel 1.0000
+  origen 11 | magnitud  | H= 1 | LSTM rel 0.9779
+  origen 11 | magnitud  | H= 5 | LSTM rel 0.9928
+  origen 11 | magnitud  | H=10 | LSTM rel 0.9892
+  origen 11 | magnitud  | H=20 | LSTM rel 0.9912
+  -- origen 12/12 completo | 229 min transcurridos | quedan ~0 min --
+
+guardado en C:\Users\Carlos\TFG_MATES\tfg-lstm-series-financieras\resultados\rejilla_definitiva.csv  (528 filas)
+tiempo total 3.82 h

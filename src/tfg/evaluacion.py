@@ -20,6 +20,8 @@ bibliografia:
 
 from __future__ import annotations
 
+import time as _t
+
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -119,6 +121,7 @@ def ejecuta_rejilla(rendimientos: pd.DataFrame, horizontes: tuple[int, ...],
     cfg_base = cfg or Mo.Config()
     particiones = origenes_moviles(rendimientos.index, n_origenes, dias_prueba)
     filas = []
+    _inicio = _t.time()
 
     for i_org, part in enumerate(particiones):
         utiles = V.series_utilizables(rendimientos, part)
