@@ -58,7 +58,14 @@ def revisa(ruta: str) -> int:
             print(f"{etiqueta}  barra suelta al final: ...{d[-45:]!r}")
             fallos += 1
 
-        # 4. negrita o cursiva de Markdown coladas en un .tex
+        # 4. porcentaje dentro de modo matematico: babel-spanish lo redefine
+        #    y produce "Incompatible glue units", que aborta la compilacion.
+        import re as _re
+        for m in _re.finditer(r"\$[^$]*" + _re.escape(B) + r"%[^$]*\$", linea):
+            print(f"{etiqueta}  % dentro de modo matematico: {m.group(0)!r}")
+            fallos += 1
+
+        # 5. negrita o cursiva de Markdown coladas en un .tex
         if "**" in linea:
             print(f"{etiqueta}  negrita de Markdown: ...{d[:60]!r}")
             fallos += 1
