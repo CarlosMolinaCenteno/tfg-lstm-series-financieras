@@ -79,6 +79,8 @@ GLOBALES = {("anexoA-redes.tex", "Bishop"), ("anexoA-redes.tex", "Goodfellow"),
             ("cap2-problema.tex", "Engle-1982"),
             ("cap2-problema.tex", "Bollerslev-1986"),
             ("cap2-problema.tex", "Corsi-2009"),
+            ("cap6-experimento.tex", "Bollerslev-1986"),
+            ("cap6-experimento.tex", "Corsi-2009"),
             ("anexoC-protocolo.tex", "Diebold-Mariano"),
             ("anexoC-protocolo.tex", "Harvey-1997"),
             # En las conclusiones se remite a los dos resultados en bloque;
