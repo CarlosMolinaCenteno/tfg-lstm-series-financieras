@@ -1,0 +1,14 @@
+panel completo: 3664 fechas x 275 series
+12 origenes; el ultimo es el mas caro:
+  Particion(entrena < 2025-07-31 <= valida < 2026-01-30 <= prueba < 2026-07-31)
+series utilizables en este origen: 274 de 275
+epocas medias hasta la parada temprana en el piloto: 10.4
+
+ paso     muestras    s/epoca  min/entren.   h rejilla
+-------------------------------------------------------
+    3      304,457       16.5          2.9         9.2
+    5      182,674       10.4          1.8         5.8
+   10       91,474        4.9          0.8         2.7
+
+rejilla = 12 origenes x 4 horizontes x 2 tareas x 2 semillas = 192 entrenamientos
+cota superior: el ultimo origen es el que mas datos tiene, los anteriores son mas baratos

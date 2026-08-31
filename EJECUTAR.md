@@ -26,13 +26,14 @@ python -m venv .venv
 
 ## Paso 1 — comprobaciones (medio minuto)
 
-Las cuatro deben terminar con «Todas las comprobaciones pasan».
+Las cinco deben terminar con «Todas las comprobaciones pasan».
 
 ```bash
 .venv/Scripts/python tests/test_ventanas.py
 .venv/Scripts/python tests/test_metricas.py
 .venv/Scripts/python tests/test_modelo.py
 .venv/Scripts/python tests/test_evaluacion.py
+.venv/Scripts/python tests/test_controles.py
 ```
 
 ## Paso 2 — prueba de humo (unos 6 minutos)
@@ -73,12 +74,49 @@ Con más de 4 hilos el tiempo baja aproximadamente en proporción.
 - No necesita supervisión. Se puede cerrar la sesión si el proceso no depende de ella
   (`nohup` en Linux, o dejar la ventana abierta en Windows).
 
+## Paso 5 — los controles de atribución
+
+Responden a la pregunta que la rejilla no responde: **de dónde viene la ganancia de la
+tarea de magnitud**. La referencia de esa tarea es la *media* de |ρ| en la ventana,
+mientras que la pérdida y la métrica son el *error absoluto*, cuyo óptimo es la
+*mediana*; con colas pesadas la referencia queda descentrada, y hay que comprobar
+cuánto de la ganancia es simplemente eso.
+
+Dos partes. La barata no entrena ninguna red:
+
+```bash
+.venv/Scripts/python -u src/ejecuta_controles.py --tareas magnitud --sin-ablacion \
+    > resultados/controles_magnitud.log 2>&1
+.venv/Scripts/python -u src/ejecuta_controles.py --tareas nivel --sin-ablacion --sin-garch \
+    --salida controles_nivel.csv > resultados/controles_nivel.log 2>&1
+```
+
+Unos 30 minutos en total. Deja `resultados/controles.csv` y `resultados/controles_nivel.csv`.
+
+La cara **es la que hay que ejecutar en el equipo grande**. Añade la ablación de signo:
+la misma red entrenada con |ρ| de entrada, para separar el efecto apalancamiento de la
+memoria. Son 96 entrenamientos, unas dos horas:
+
+```bash
+.venv/Scripts/python -u src/ejecuta_controles.py > resultados/controles.log 2>&1
+```
+
+Sin argumentos hace las dos tareas, los nueve controles y la ablación, todo a un fichero.
+
+Y para leer los resultados:
+
+```bash
+.venv/Scripts/python src/analiza_controles.py
+```
+
 ## Qué hay que devolver
 
-Dos ficheros, unos 150 KB en total:
+Cuatro ficheros, unos 300 KB en total:
 
 - `resultados/rejilla_definitiva.csv`
+- `resultados/controles*.csv`
 - `ejecucion.log`
+- `resultados/controles*.log`
 
 ## Si algo falla
 

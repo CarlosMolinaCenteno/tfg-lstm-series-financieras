@@ -1,0 +1,36 @@
+panel (1257, 30)
+  origen 0 | nivel     | H= 1 | LSTM rel 1.0098
+  origen 0 | nivel     | H= 5 | LSTM rel 1.0046
+  origen 0 | nivel     | H=10 | LSTM rel 1.0055
+  origen 0 | nivel     | H=20 | LSTM rel 1.0029
+  origen 0 | magnitud  | H= 1 | LSTM rel 1.0277
+  origen 0 | magnitud  | H= 5 | LSTM rel 1.0264
+  origen 0 | magnitud  | H=10 | LSTM rel 1.0335
+  origen 0 | magnitud  | H=20 | LSTM rel 1.0382
+  origen 1 | nivel     | H= 1 | LSTM rel 1.0093
+  origen 1 | nivel     | H= 5 | LSTM rel 1.0059
+  origen 1 | nivel     | H=10 | LSTM rel 1.0041
+  origen 1 | nivel     | H=20 | LSTM rel 1.0033
+  origen 1 | magnitud  | H= 1 | LSTM rel 0.9375
+  origen 1 | magnitud  | H= 5 | LSTM rel 0.9378
+  origen 1 | magnitud  | H=10 | LSTM rel 0.9442
+  origen 1 | magnitud  | H=20 | LSTM rel 0.9452
+  origen 2 | nivel     | H= 1 | LSTM rel 1.0042
+  origen 2 | nivel     | H= 5 | LSTM rel 1.0023
+  origen 2 | nivel     | H=10 | LSTM rel 1.0027
+  origen 2 | nivel     | H=20 | LSTM rel 1.0030
+  origen 2 | magnitud  | H= 1 | LSTM rel 0.9493
+  origen 2 | magnitud  | H= 5 | LSTM rel 0.9576
+  origen 2 | magnitud  | H=10 | LSTM rel 0.9611
+  origen 2 | magnitud  | H=20 | LSTM rel 0.9602
+  origen 3 | nivel     | H= 1 | LSTM rel 0.9964
+  origen 3 | nivel     | H= 5 | LSTM rel 0.9960
+  origen 3 | nivel     | H=10 | LSTM rel 0.9970
+  origen 3 | nivel     | H=20 | LSTM rel 0.9977
+  origen 3 | magnitud  | H= 1 | LSTM rel 0.9522
+  origen 3 | magnitud  | H= 5 | LSTM rel 0.9520
+  origen 3 | magnitud  | H=10 | LSTM rel 1.0002
+  origen 3 | magnitud  | H=20 | LSTM rel 1.0066
+
+guardado en C:\Users\cmolina\Desktop\TFG_MATES\resultados\rejilla_piloto.csv  (208 filas)
+tiempo total 19.3 min

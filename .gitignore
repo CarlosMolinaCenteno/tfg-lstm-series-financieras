@@ -27,6 +27,7 @@
 !/resultados/
 /resultados/*
 !/resultados/*.csv
+!/resultados/*.log
 !/ejecucion.log
 
 # 3. Y dentro de lo habilitado, excluir lo generado

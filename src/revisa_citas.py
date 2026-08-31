@@ -56,12 +56,35 @@ SIN_PDF = {
     "Guilhoto": "trabajo sin publicar, sin paginacion estable",
     "Werbos-2006": "sin PDF; se cita a la obra entera, sin localizador",
     "Rudin": "libro fuera de raw/; teoremas 1.34, 5.19 y 6.19 verificados a mano",
+    # Fuentes traidas en la revision de septiembre de 2026, fuera de raw/:
+    # se citan por seccion o a la obra entera, y sus anclas no se pueden
+    # comprobar aqui porque el PDF no esta en el repositorio.
+    "Gers-2000": "fuera de raw/; se cita por seccion",
+    "Bengio-1994": "fuera de raw/; se cita por seccion",
+    "Pascanu-2013": "fuera de raw/; se cita por seccion",
+    "Engle-1982": "fuera de raw/; se cita a la obra entera",
+    "Bollerslev-1986": "fuera de raw/; se cita a la obra entera",
+    "Corsi-2009": "fuera de raw/; se cita a la obra entera",
+    "Diebold-Mariano": "fuera de raw/; se cita a la obra entera",
+    "Harvey-1997": "fuera de raw/; se cita a la obra entera",
+    "Funahashi-1993": "fuera de raw/; se cita al teorema, sin pagina",
+    "Schafer-2006": "fuera de raw/; se cita por seccion",
 }
 
 # Citas a la obra entera, sin localizador a proposito.
 GLOBALES = {("anexoA-redes.tex", "Bishop"), ("anexoA-redes.tex", "Goodfellow"),
             ("anexoA-redes.tex", "Higham"), ("anexoA-redes.tex", "Guilhoto"),
-            ("cap4-gradiente.tex", "Werbos-2006")}
+            ("cap4-gradiente.tex", "Werbos-2006"),
+            # El modelo entero es la referencia, no un pasaje suyo.
+            ("cap2-problema.tex", "Engle-1982"),
+            ("cap2-problema.tex", "Bollerslev-1986"),
+            ("cap2-problema.tex", "Corsi-2009"),
+            ("anexoC-protocolo.tex", "Diebold-Mariano"),
+            ("anexoC-protocolo.tex", "Harvey-1997"),
+            # En las conclusiones se remite a los dos resultados en bloque;
+            # el Anexo A los cita con su localizador.
+            ("cap7-conclusiones.tex", "Funahashi-1993"),
+            ("cap7-conclusiones.tex", "Schafer-2006")}
 
 CITA = re.compile(r"\\cite(?:\[([^\]]*)\])?\{([^}]+)\}")
 COMILLAS = re.compile(r"«([^»]{25,})»", re.S)

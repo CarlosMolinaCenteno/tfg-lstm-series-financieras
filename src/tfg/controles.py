@@ -49,6 +49,26 @@ from scipy import optimize
 # ---------------------------------------------------------------------------
 
 
+def constante_optima_l1(y_entrena: np.ndarray) -> float:
+    """Constante que minimiza el error absoluto en entrenamiento.
+
+    Es la mediana de los objetivos, y es el analogo para la tarea de
+    **nivel** de lo que `escala_optima_l1` es para la de magnitud: si la
+    referencia de la tarea de nivel —predecir cero— estuviera descentrada
+    respecto del optimo de la perdida, esta constante lo revelaria. Se
+    incluye por simetria, para que la misma objecion se aplique a las dos
+    tareas y no solo a una.
+    """
+    y = np.asarray(y_entrena, dtype=np.float64).ravel()
+    y = y[np.isfinite(y)]
+    return float(np.median(y)) if len(y) else 0.0
+
+
+def constante(X: np.ndarray, H: int, valor: float) -> np.ndarray:
+    """Predice siempre el mismo valor."""
+    return np.full((len(X), H), valor, dtype=np.float32)
+
+
 def mediana_reciente(X: np.ndarray, H: int, ventana: int | None = None
                      ) -> np.ndarray:
     """Predice la **mediana** de los valores absolutos recientes.

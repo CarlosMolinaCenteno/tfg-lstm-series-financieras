@@ -1,0 +1,17 @@
+universo 2012-01-03 a 2026-08-01
+panel: 3664 fechas x 275 series
+  origen 0 | nivel    | H= 1 | regresion agrupada (L1)    rel 1.0011
+  origen 0 | nivel    | H= 5 | regresion agrupada (L1)    rel 0.9957
+  origen 0 | nivel    | H=10 | regresion agrupada (L1)    rel 0.9975
+  origen 0 | nivel    | H=20 | regresion agrupada (L1)    rel 0.9999
+  -- origen 1/12 completo | 1 min | quedan ~11 min --
+  origen 1 | nivel    | H= 1 | regresion agrupada (L1)    rel 1.0055
+  origen 1 | nivel    | H= 5 | regresion agrupada (L1)    rel 1.0069
+  origen 1 | nivel    | H=10 | regresion agrupada (L1)    rel 1.0081
+  origen 1 | nivel    | H=20 | regresion agrupada (L1)    rel 1.0094
+  -- origen 2/12 completo | 2 min | quedan ~11 min --
+  origen 2 | nivel    | H= 1 | regresion agrupada (L1)    rel 0.9846
+  origen 2 | nivel    | H= 5 | regresion agrupada (L1)    rel 0.9977
+  origen 2 | nivel    | H=10 | regresion agrupada (L1)    rel 0.9973
+  origen 2 | nivel    | H=20 | regresion agrupada (L1)    rel 0.9983
+  -- origen 3/12 completo | 3 min | quedan ~10 min --
