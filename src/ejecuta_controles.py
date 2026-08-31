@@ -109,6 +109,9 @@ def main() -> int:
                    help="omite la parte D, que es la unica que entrena redes")
     p.add_argument("--sin-garch", action="store_true",
                    help="omite el GARCH, que es lo mas lento de la parte B")
+    p.add_argument("--solo-ablacion", action="store_true",
+                   help="ejecuta unicamente la parte D, la ablacion de signo, "
+                        "que es lo unico que entrena redes")
     p.add_argument("--salida", type=str, default="controles.csv")
     a = p.parse_args()
 
@@ -132,7 +135,7 @@ def main() -> int:
         entrena_panel = norm.loc[norm.index < part.fin_entrena]
 
         garch = None
-        if not a.sin_garch:
+        if not a.sin_garch and not a.solo_ablacion:
             t_g = time.time()
             garch = C.GarchAgrupado().ajusta(entrena_panel)
             print(f"  origen {i_org}: GARCH agrupado {garch.par}, "
@@ -140,6 +143,8 @@ def main() -> int:
                   f"{(time.time() - t_g) / 60:.1f} min", flush=True)
 
         for tarea in a.tareas:
+            if a.solo_ablacion and tarea != "magnitud":
+                continue   # la ablacion de signo solo aplica a la magnitud
             ref_nombre = REFERENCIA[tarea]
             pred_ref = (B.cero if tarea == "nivel" else B.volatilidad_reciente)
 
@@ -160,6 +165,8 @@ def main() -> int:
                 def anota(nombre, pred_pru, semilla=None, extra=None,
                           _t=tarea, _H=H, _p=pru, _e=escala, _r=mase_ref,
                           _n=len(ent)):
+                    if a.solo_ablacion and nombre != "LSTM sin signo":
+                        return
                     filas.append(_fila(
                         i_org, part, _t, _H, nombre, semilla,
                         M.mase(_p.y, pred_pru, _p.ticker, _e),

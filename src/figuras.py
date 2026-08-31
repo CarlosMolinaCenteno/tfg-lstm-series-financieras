@@ -201,7 +201,7 @@ def fig_gradiente():
                      label=r"$\left\|W_r\right\|=" + format(norma, ".1f") + "$")
     izq.set_title("red recurrente estándar", fontsize=9)
     izq.set_xlabel(r"distancia temporal $l-t$")
-    izq.set_ylabel("fracción del gradiente")
+    izq.set_ylabel("cota de la fracción")
     izq.legend(loc="lower left", fontsize=7.5)
 
     # Celda con puertas: producto de puertas de olvido.

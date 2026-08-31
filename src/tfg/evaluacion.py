@@ -83,6 +83,64 @@ def wilcoxon_pareado(modelo: pd.Series, referencia: pd.Series,
             "gana_en": int((a < b).sum())}
 
 
+def diebold_mariano(modelo: pd.Series, referencia: pd.Series,
+                    h: int = 1) -> dict[str, float]:
+    """Contraste de Diebold-Mariano con la correccion de muestra pequena.
+
+    Es el instrumento propio del area para comparar precision predictiva, y
+    responde a algo que el Wilcoxon de `wilcoxon_pareado` no puede dar. Aquel
+    supone observaciones independientes, y los origenes moviles no lo son: la
+    ventana de entrenamiento es creciente y anidada, y los tramos de prueba
+    son periodos consecutivos del mismo mercado.
+
+    Diebold y Mariano (1995) trabajan sobre la serie de **diferencias de
+    perdida** `d_i` y admiten que este autocorrelada: el estadistico usa una
+    varianza de largo plazo que suma las autocovarianzas hasta el retardo
+    `h-1`. Harvey, Leybourne y Newbold (1997) anaden la correccion que hace
+    falta con muestras cortas -- y doce origenes lo son --, que multiplica el
+    estadistico por un factor menor que uno y lo contrasta contra una t de
+    Student con `n-1` grados de libertad en lugar de una normal.
+
+    Se aplica **al nivel de origen**, que es la unidad que el diseno de este
+    trabajo proporciona: cada origen aporta una diferencia de perdida. Con
+    `h=1` la varianza de largo plazo se reduce a la muestral, de modo que el
+    contraste es una t con la correccion HLN; con `h>1` se suman las
+    autocovarianzas, que es lo que corresponde cuando los tramos evaluados se
+    solapan en horizonte.
+
+    Devuelve el estadistico, su valor p unilateral (H1: el modelo pierde
+    menos que la referencia) y la media de las diferencias.
+    """
+    comun = modelo.index.intersection(referencia.index)
+    d = (modelo.loc[comun] - referencia.loc[comun]).to_numpy(dtype=float)
+    n = len(d)
+    if n < 3:
+        return {}
+    media = float(d.mean())
+    centrada = d - media
+
+    # Varianza de largo plazo: gamma_0 + 2 sum_{k=1}^{h-1} gamma_k.
+    gamma0 = float((centrada ** 2).mean())
+    larga = gamma0
+    for k in range(1, min(h, n)):
+        gk = float((centrada[k:] * centrada[:-k]).mean())
+        larga += 2.0 * gk
+    if larga <= 0:
+        larga = gamma0
+    if larga <= 0:
+        return {}
+
+    dm = media / np.sqrt(larga / n)
+
+    # Correccion de Harvey, Leybourne y Newbold para muestras pequenas.
+    factor = np.sqrt((n + 1 - 2 * h + h * (h - 1) / n) / n)
+    hln = float(dm * factor)
+    p = float(stats.t.cdf(hln, df=n - 1))   # unilateral: H1 es media < 0
+
+    return {"estadistico": float(dm), "estadistico_hln": hln,
+            "p": p, "n": n, "h": h, "diferencia_media": media}
+
+
 def friedman(resultados: dict[str, pd.Series]) -> dict[str, float]:
     """Contraste de Friedman de rangos, para comparar varios metodos a la vez.
 

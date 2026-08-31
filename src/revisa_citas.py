@@ -71,6 +71,7 @@ SIN_PDF = {
     "Harvey-1997": "fuera de raw/; se cita a la obra entera",
     "Funahashi-1993": "tras muro de pago; se cita a la obra entera",
     "Schafer-2006": "tras muro de pago; se cita a la obra entera",
+    "Wolpert-1996": "fuera de raw/; se cita a la obra entera",
 }
 
 # Citas a la obra entera, sin localizador a proposito.
@@ -83,6 +84,13 @@ GLOBALES = {("anexoA-redes.tex", "Bishop"), ("anexoA-redes.tex", "Goodfellow"),
             ("cap2-problema.tex", "Corsi-2009"),
             ("cap6-experimento.tex", "Bollerslev-1986"),
             ("cap6-experimento.tex", "Corsi-2009"),
+            # El teorema es de Wolpert; el localizador que acompana a la
+            # cita es el del manual que lo reproduce, no el del original.
+            ("cap2-problema.tex", "Wolpert-1996"),
+            # El pie del cuadro remite a los dos contrastes en bloque; el
+            # Anexo C los describe.
+            ("cap6-experimento.tex", "Diebold-Mariano"),
+            ("cap6-experimento.tex", "Harvey-1997"),
             ("anexoC-protocolo.tex", "Diebold-Mariano"),
             ("anexoC-protocolo.tex", "Harvey-1997"),
             # Cuatro fuentes que no se han podido abrir -- estan tras muro de
