@@ -2,3 +2,69 @@ universo 2012-01-03 a 2026-08-01
 panel: 3664 fechas x 275 series
   origen 0 | magnitud | H= 1 | LSTM sin signo             rel 0.9167
   origen 0 | magnitud | H= 5 | LSTM sin signo             rel 0.9230
+  origen 0 | magnitud | H=10 | LSTM sin signo             rel 0.9210
+  origen 0 | magnitud | H=20 | LSTM sin signo             rel 0.9252
+  -- origen 1/12 completo | 19 min | quedan ~214 min --
+  origen 1 | magnitud | H= 1 | LSTM sin signo             rel 0.9549
+  origen 1 | magnitud | H= 5 | LSTM sin signo             rel 0.9476
+  origen 1 | magnitud | H=10 | LSTM sin signo             rel 0.9346
+  origen 1 | magnitud | H=20 | LSTM sin signo             rel 0.9256
+  -- origen 2/12 completo | 30 min | quedan ~150 min --
+  origen 2 | magnitud | H= 1 | LSTM sin signo             rel 0.9564
+  origen 2 | magnitud | H= 5 | LSTM sin signo             rel 0.9753
+  origen 2 | magnitud | H=10 | LSTM sin signo             rel 0.9743
+  origen 2 | magnitud | H=20 | LSTM sin signo             rel 0.9778
+  -- origen 3/12 completo | 44 min | quedan ~131 min --
+  origen 3 | magnitud | H= 1 | LSTM sin signo             rel 1.0215
+  origen 3 | magnitud | H= 5 | LSTM sin signo             rel 0.9807
+  origen 3 | magnitud | H=10 | LSTM sin signo             rel 0.9946
+  origen 3 | magnitud | H=20 | LSTM sin signo             rel 1.0135
+  -- origen 4/12 completo | 57 min | quedan ~114 min --
+  origen 4 | magnitud | H= 1 | LSTM sin signo             rel 0.9605
+  origen 4 | magnitud | H= 5 | LSTM sin signo             rel 0.9391
+  origen 4 | magnitud | H=10 | LSTM sin signo             rel 0.9382
+  origen 4 | magnitud | H=20 | LSTM sin signo             rel 0.9420
+  -- origen 5/12 completo | 67 min | quedan ~94 min --
+  origen 5 | magnitud | H= 1 | LSTM sin signo             rel 0.9705
+  origen 5 | magnitud | H= 5 | LSTM sin signo             rel 0.9515
+  origen 5 | magnitud | H=10 | LSTM sin signo             rel 0.9463
+  origen 5 | magnitud | H=20 | LSTM sin signo             rel 0.9421
+  -- origen 6/12 completo | 82 min | quedan ~82 min --
+  origen 6 | magnitud | H= 1 | LSTM sin signo             rel 0.9606
+  origen 6 | magnitud | H= 5 | LSTM sin signo             rel 0.9453
+  origen 6 | magnitud | H=10 | LSTM sin signo             rel 0.9454
+  origen 6 | magnitud | H=20 | LSTM sin signo             rel 0.9501
+  -- origen 7/12 completo | 96 min | quedan ~68 min --
+  origen 7 | magnitud | H= 1 | LSTM sin signo             rel 0.9478
+  origen 7 | magnitud | H= 5 | LSTM sin signo             rel 0.9649
+  origen 7 | magnitud | H=10 | LSTM sin signo             rel 0.9593
+  origen 7 | magnitud | H=20 | LSTM sin signo             rel 0.9593
+  -- origen 8/12 completo | 114 min | quedan ~57 min --
+  origen 8 | magnitud | H= 1 | LSTM sin signo             rel 0.9655
+  origen 8 | magnitud | H= 5 | LSTM sin signo             rel 0.9393
+  origen 8 | magnitud | H=10 | LSTM sin signo             rel 0.9367
+  origen 8 | magnitud | H=20 | LSTM sin signo             rel 0.9321
+  -- origen 9/12 completo | 133 min | quedan ~44 min --
+  origen 9 | magnitud | H= 1 | LSTM sin signo             rel 0.9408
+  origen 9 | magnitud | H= 5 | LSTM sin signo             rel 0.9118
+  origen 9 | magnitud | H=10 | LSTM sin signo             rel 0.9152
+  origen 9 | magnitud | H=20 | LSTM sin signo             rel 0.9121
+  -- origen 10/12 completo | 147 min | quedan ~29 min --
+  origen 10 | magnitud | H= 1 | LSTM sin signo             rel 0.9585
+  origen 10 | magnitud | H= 5 | LSTM sin signo             rel 0.9580
+  origen 10 | magnitud | H=10 | LSTM sin signo             rel 0.9574
+  origen 10 | magnitud | H=20 | LSTM sin signo             rel 0.9538
+  -- origen 11/12 completo | 163 min | quedan ~15 min --
+  origen 11 | magnitud | H= 1 | LSTM sin signo             rel 0.9689
+  origen 11 | magnitud | H= 5 | LSTM sin signo             rel 0.9889
+  origen 11 | magnitud | H=10 | LSTM sin signo             rel 0.9913
+  origen 11 | magnitud | H=20 | LSTM sin signo             rel 0.9906
+  -- origen 12/12 completo | 185 min | quedan ~0 min --
+
+guardado en C:\Users\cmolina\Desktop\TFG_MATES\resultados\controles_ablacion.csv  (96 filas)
+tiempo total 3.09 h
+
+resumen de magnitud (media sobre origenes, por horizonte):
+H                   1       5       10      20
+metodo                                        
+LSTM sin signo  0.9599  0.9521  0.9508  0.9522
