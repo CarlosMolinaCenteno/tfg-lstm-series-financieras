@@ -59,16 +59,18 @@ SIN_PDF = {
     # Fuentes traidas en la revision de septiembre de 2026, fuera de raw/:
     # se citan por seccion o a la obra entera, y sus anclas no se pueden
     # comprobar aqui porque el PDF no esta en el repositorio.
-    "Gers-2000": "fuera de raw/; se cita por seccion",
-    "Bengio-1994": "fuera de raw/; se cita por seccion",
-    "Pascanu-2013": "fuera de raw/; se cita por seccion",
+    "Gers-2000": "tras muro de pago; se cita a la obra entera",
+    "Bengio-1994": "tras muro de pago; se cita a la obra entera",
+    # Unica de las diez cuyo texto SI se ha podido abrir (PMLR, acceso
+    # libre): sus dos localizadores estan verificados contra el PDF.
+    "Pascanu-2013": "fuera de raw/; §2.1 y §3.2 verificados en el PDF de PMLR",
     "Engle-1982": "fuera de raw/; se cita a la obra entera",
     "Bollerslev-1986": "fuera de raw/; se cita a la obra entera",
     "Corsi-2009": "fuera de raw/; se cita a la obra entera",
     "Diebold-Mariano": "fuera de raw/; se cita a la obra entera",
     "Harvey-1997": "fuera de raw/; se cita a la obra entera",
-    "Funahashi-1993": "fuera de raw/; se cita al teorema, sin pagina",
-    "Schafer-2006": "fuera de raw/; se cita por seccion",
+    "Funahashi-1993": "tras muro de pago; se cita a la obra entera",
+    "Schafer-2006": "tras muro de pago; se cita a la obra entera",
 }
 
 # Citas a la obra entera, sin localizador a proposito.
@@ -83,10 +85,17 @@ GLOBALES = {("anexoA-redes.tex", "Bishop"), ("anexoA-redes.tex", "Goodfellow"),
             ("cap6-experimento.tex", "Corsi-2009"),
             ("anexoC-protocolo.tex", "Diebold-Mariano"),
             ("anexoC-protocolo.tex", "Harvey-1997"),
-            # En las conclusiones se remite a los dos resultados en bloque;
-            # el Anexo A los cita con su localizador.
+            # Cuatro fuentes que no se han podido abrir -- estan tras muro de
+            # pago y no hay copia en raw/ --, de modo que NO se les pone
+            # localizador: un ancla sin comprobar es peor que ninguna. Si
+            # algun dia se consiguen los PDF, se les anaden anclas y se
+            # quitan de aqui.
             ("cap7-conclusiones.tex", "Funahashi-1993"),
-            ("cap7-conclusiones.tex", "Schafer-2006")}
+            ("cap7-conclusiones.tex", "Schafer-2006"),
+            ("anexoA-redes.tex", "Funahashi-1993"),
+            ("anexoA-redes.tex", "Schafer-2006"),
+            ("cap4-gradiente.tex", "Bengio-1994"),
+            ("cap5-lstm.tex", "Gers-2000")}
 
 CITA = re.compile(r"\\cite(?:\[([^\]]*)\])?\{([^}]+)\}")
 COMILLAS = re.compile(r"«([^»]{25,})»", re.S)
