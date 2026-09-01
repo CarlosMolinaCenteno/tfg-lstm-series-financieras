@@ -86,22 +86,28 @@ Dos partes. La barata no entrena ninguna red:
 
 ```bash
 .venv/Scripts/python -u src/ejecuta_controles.py --tareas magnitud --sin-ablacion \
-    > resultados/controles_magnitud.log 2>&1
+    --salida controles_magnitud.csv > resultados/controles_magnitud.log 2>&1
 .venv/Scripts/python -u src/ejecuta_controles.py --tareas nivel --sin-ablacion --sin-garch \
     --salida controles_nivel.csv > resultados/controles_nivel.log 2>&1
 ```
 
-Unos 30 minutos en total. Deja `resultados/controles.csv` y `resultados/controles_nivel.csv`.
+Unos 30 minutos en total. Deja `resultados/controles_magnitud.csv` y
+`resultados/controles_nivel.csv`. `src/analiza_controles.py` lee todos los
+`resultados/controles*.csv` que encuentre, de modo que las pasadas se pueden hacer por
+separado.
 
 La cara **es la que hay que ejecutar en el equipo grande**. Añade la ablación de signo:
 la misma red entrenada con |ρ| de entrada, para separar el efecto apalancamiento de la
-memoria. Son 96 entrenamientos, unas dos horas:
+memoria. Son 96 entrenamientos; en el equipo de referencia llevó **3,1 horas**.
 
 ```bash
-.venv/Scripts/python -u src/ejecuta_controles.py > resultados/controles.log 2>&1
+.venv/Scripts/python -u src/ejecuta_controles.py --solo-ablacion \
+    --salida controles_ablacion.csv > resultados/controles_ablacion.log 2>&1
 ```
 
-Sin argumentos hace las dos tareas, los nueve controles y la ablación, todo a un fichero.
+`--solo-ablacion` salta los controles baratos, que ya están hechos en el paso anterior.
+Sin ningún argumento hace las dos tareas, los nueve controles y la ablación de una vez,
+todo al mismo fichero.
 
 Y para leer los resultados:
 
