@@ -143,6 +143,60 @@ def persistencia_garch(rej, ctl):
     return min(vals), max(vals)
 
 
+def gana_vs_referencia(rej, ctl, tarea):
+    """Origenes en que la red bate a la referencia de su tarea, por horizonte.
+
+    La referencia es el denominador del MASE relativo, asi que batirla es
+    exactamente que la metrica quede por debajo de uno.
+    """
+    out = {}
+    for H in HORIZONTES:
+        s = _piv(rej, tarea, H)["LSTM"]
+        out[H] = int((s < 1).sum())
+    return out
+
+
+def gana_nivel(rej, ctl):
+    return gana_vs_referencia(rej, ctl, "nivel")
+
+
+def gana_magnitud(rej, ctl):
+    return gana_vs_referencia(rej, ctl, "magnitud")
+
+
+def mejora_magnitud(rej, ctl):
+    """Rango de la mejora media de la tarea de magnitud, en porcentaje.
+
+    Es 1 menos el error escalado relativo medio de la red, horizonte por
+    horizonte. El minimo (3,95 % con H=1) no llega a cuatro, asi que la cota
+    inferior que la memoria declara tiene que quedar por debajo de el.
+    """
+    v = []
+    for H in HORIZONTES:
+        v.append((1 - _piv(rej, "magnitud", H)["LSTM"].mean()) * 100)
+    return min(v), max(v)
+
+
+def razon_dispersion(rej, ctl):
+    """Rango de la razon entre dispersiones sobre las ocho celdas tarea x H.
+
+    Numerador: desviacion de las medias por origen. Denominador: desviacion
+    COMBINADA dentro de los origenes, la raiz de la varianza media -- no la
+    media de las desviaciones, que la subestima. Misma convencion que
+    `analiza_rejilla.cuadro_varianza`.
+    """
+    rs = []
+    for tarea in ("nivel", "magnitud"):
+        for H in HORIZONTES:
+            d = rej[(rej["tarea"] == tarea) & (rej["H"] == H)
+                    & (rej["metodo"] == "LSTM")]
+            g = d.groupby("origen")["mase_rel_medio"]
+            entre_sem = float(np.sqrt(g.var(ddof=1).mean()))
+            if entre_sem:
+                rs.append(g.mean().std(ddof=1) / entre_sem)
+    return min(rs), max(rs)
+
+
 def series_filtro(rej, ctl):
     return sorted(int(x) for x in rej["n_series"].unique())
 
@@ -241,6 +295,68 @@ AFIRMACIONES = [
      persistencia_garch,
      lambda v: round(v[0], 2) == 0.90 and round(v[1], 2) == 0.96,
      "persistencia del GARCH agrupado"),
+
+    # --- los resumenes: primeras cifras que se leen, y hasta la revision
+    # --- del 2026-09-01 no las vigilaba nadie.
+    ("resumen.tex",
+     "gana en cinco o seis de doce",
+     gana_nivel,
+     lambda v: set(v.values()) <= {5, 6},
+     "resumen: origenes ganados en la tarea de nivel"),
+
+    ("resumen.tex",
+     "en once o doce de los doce",
+     gana_magnitud,
+     lambda v: set(v.values()) <= {11, 12},
+     "resumen: origenes ganados en la tarea de magnitud"),
+
+    ("cap6-experimento.tex",
+     "aporta entre el 3,9 y el 4,9 por ciento",
+     mejora_magnitud,
+     lambda v: v[0] >= 3.9 and v[0] < 4.0 and v[1] <= 4.9 and v[1] > 4.8,
+     "capitulo 6: mejora de la tarea de magnitud"),
+
+    ("cap7-conclusiones.tex",
+     "y aporta entre el\n3,9 y el 4,9 por ciento",
+     mejora_magnitud,
+     lambda v: v[0] >= 3.9 and v[0] < 4.0 and v[1] <= 4.9 and v[1] > 4.8,
+     "conclusiones: mejora de la tarea de magnitud"),
+
+    ("resumen.tex",
+     "mejora entre\nel 3,9 y el 4,9 por ciento",
+     mejora_magnitud,
+     lambda v: v[0] >= 3.9 and v[0] < 4.0 and v[1] <= 4.9 and v[1] > 4.8,
+     "resumen castellano: mejora de la tarea de magnitud"),
+
+    ("resumen.tex",
+     "benchmark by 3.9 to 4.9 per cent",
+     mejora_magnitud,
+     lambda v: v[0] >= 3.9 and v[0] < 4.0 and v[1] <= 4.9 and v[1] > 4.8,
+     "resumen ingles: mejora de la tarea de magnitud"),
+
+    ("resumen.tex",
+     "resulta de 1,8 a 22,3 veces mayor",
+     razon_dispersion,
+     lambda v: round(v[0], 1) == 1.8 and round(v[1], 1) == 22.3,
+     "resumen castellano: razon entre dispersiones"),
+
+    ("resumen.tex",
+     "proves 1.8 to\n22.3 times larger",
+     razon_dispersion,
+     lambda v: round(v[0], 1) == 1.8 and round(v[1], 1) == 22.3,
+     "resumen ingles: razon entre dispersiones"),
+
+    ("cap6-experimento.tex",
+     "\\textbf{1,8 a 22,3 veces mayor}",
+     razon_dispersion,
+     lambda v: round(v[0], 1) == 1.8 and round(v[1], 1) == 22.3,
+     "capitulo 6: razon entre dispersiones"),
+
+    ("cap7-conclusiones.tex",
+     "es de 1,8 a\n22,3 veces mayor",
+     razon_dispersion,
+     lambda v: round(v[0], 1) == 1.8 and round(v[1], 1) == 22.3,
+     "conclusiones: razon entre dispersiones"),
 
     ("anexoC-protocolo.tex",
      "El código incluye cincuenta y seis comprobaciones automáticas",
