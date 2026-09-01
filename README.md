@@ -31,7 +31,7 @@ signo descartan las cuatro explicaciones alternativas —ser global, ponderar, m
 no linealidad, efecto apalancamiento—. Una red recurrente de unos 5000 parámetros
 aprende aquí, en la práctica, un factor de escala.
 
-Los números están en `resultados/`; `src/analiza_controles.py` reconstruye los cuadros.
+Los números están en `resultados/`. `src/analiza_rejilla.py` reconstruye los cuadros de la rejilla y `src/analiza_controles.py` los de los controles de atribución; entre los dos imprimen todas las cifras publicadas.
 
 ## Instalación
 

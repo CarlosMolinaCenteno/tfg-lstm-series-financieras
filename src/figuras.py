@@ -147,10 +147,14 @@ def fig_acf():
           + str(n_obs) + " sesiones; banda del promedio +-"
           + format(float(np.mean(sup)), ".4f")
           + ", banda de una serie +-" + format(banda_serie, ".4f") + ")")
+    # El modulo medio de los retardos que salen de la banda es la cifra que
+    # el capitulo 2 compara con el 0,03 de Fama; conviene imprimirla aqui
+    # para que la afirmacion tenga de donde salir.
+    fuera_nivel = (acf_nivel < inf) | (acf_nivel > sup)
     print("     (nivel: retardo 1 = " + format(acf_nivel[0], ".4f")
-          + "; fuera de banda en "
-          + str(int(((acf_nivel < inf) | (acf_nivel > sup)).sum()))
-          + " de " + str(len(retardos)) + " retardos)")
+          + "; fuera de banda en " + str(int(fuera_nivel.sum()))
+          + " de " + str(len(retardos)) + " retardos, modulo medio "
+          + format(float(np.abs(acf_nivel[fuera_nivel]).mean()), ".4f") + ")")
     print("     (magnitud: fuera de banda en "
           + str(int(((acf_magnitud < inf) | (acf_magnitud > sup)).sum()))
           + " de " + str(len(retardos)) + " retardos)")

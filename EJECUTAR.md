@@ -109,11 +109,17 @@ memoria. Son 96 entrenamientos; en el equipo de referencia llevó **3,1 horas**.
 Sin ningún argumento hace las dos tareas, los nueve controles y la ablación de una vez,
 todo al mismo fichero.
 
-Y para leer los resultados:
+Y para leer los resultados. Los dos guiones no se solapan: el primero
+reconstruye los cuadros de la rejilla —resultado por horizonte, contrastes,
+resultado por origen, norma del gradiente y descomposición de la varianza— y
+el segundo los de los controles de atribución.
 
 ```bash
+.venv/Scripts/python src/analiza_rejilla.py
 .venv/Scripts/python src/analiza_controles.py
 ```
+
+Entre los dos imprimen todas las cifras que aparecen en la memoria.
 
 ## Qué hay que devolver
 
