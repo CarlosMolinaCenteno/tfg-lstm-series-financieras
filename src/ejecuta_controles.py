@@ -225,9 +225,14 @@ def main() -> int:
                     if garch is not None:
                         c_g = C.escala_optima_l1(ent.y,
                                                  garch.predice(ent.X, H))
+                        # `parametro` guarda el factor de calibracion L1, y
+                        # `persistencia` la del propio GARCH, que es lo que
+                        # el Anexo C cita. Antes solo se imprimia.
                         anota("GARCH(1,1) agrupado",
                               C.aplica_escala(garch.predice(pru.X, H), c_g),
-                              extra={"parametro": round(float(c_g), 4)})
+                              extra={"parametro": round(float(c_g), 4),
+                                     "persistencia": round(
+                                         float(garch.par.persistencia), 4)})
 
                     # --- regresion agrupada, las dos perdidas (C) ---------
                     reg2 = B.RegresionAgrupada(absoluto=True).ajusta(

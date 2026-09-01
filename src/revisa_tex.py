@@ -9,7 +9,7 @@ un retorno de carro seguido de `ef`, `\textbf` en un tabulador seguido de
 El dano es silencioso: LaTeX compila y el texto sale mal, o ni siquiera se
 nota hasta que alguien lee el PDF. Ha ocurrido cuatro veces en este proyecto.
 
-    python src/revisa_tex.py memoria/capitulos/*.tex memoria/mitfg.tex
+    python src/revisa_tex.py memoria/capitulos/*.tex memoria/cmolina_tfg.tex
 """
 import io
 import re

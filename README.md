@@ -8,7 +8,7 @@ El trabajo estudia las redes recurrentes desde su derivación matemática —una
 
 Un modelo global recurrente entrenado sobre los rendimientos logarítmicos de los constituyentes históricos del S&P 500, evaluado con error absoluto medio relativo al de una referencia fijada de antemano para cada una de **dos tareas**: predecir el rendimiento y predecir su magnitud. El contraste entre ambas es el resultado.
 
-La referencia **no** es la predicción ingenua de manual —repetir el último valor—, que sobre rendimientos no equivale a comprar y mantener y sale un 42 % peor que predecir cero. Es la predicción nula en la tarea de nivel y la volatilidad reciente en la de magnitud.
+La referencia **no** es la predicción ingenua de manual —repetir el último valor—, que sobre rendimientos no equivale a comprar y mantener y sale un 42,5 % peor que predecir cero. Es la predicción nula en la tarea de nivel y la volatilidad reciente en la de magnitud.
 
 La razón de las dos tareas es que la hipótesis de eficiencia de mercados restringe la esperanza condicionada del **nivel** de los precios y no dice nada sobre los momentos de orden superior, mientras que la dependencia temporal documentada en los datos está en la **magnitud** de los rendimientos. El experimento pone a prueba esa distinción en lugar de intentar una predicción genérica.
 

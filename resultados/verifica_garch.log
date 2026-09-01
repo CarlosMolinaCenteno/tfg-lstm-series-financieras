@@ -1,0 +1,22 @@
+universo 2012-01-03 a 2026-08-01
+panel: 3664 fechas x 275 series
+
+  origen  0  omega=0.102212  alfa=0.0791  beta=0.8224  persistencia=0.9015   (0.3 min)
+  origen  1  omega=0.053910  alfa=0.1105  beta=0.8303  persistencia=0.9407   (0.2 min)
+  origen  2  omega=0.049444  alfa=0.1082  beta=0.8392  persistencia=0.9474   (0.3 min)
+  origen  3  omega=0.050164  alfa=0.1070  beta=0.8399  persistencia=0.9469   (0.3 min)
+  origen  4  omega=0.051118  alfa=0.1045  beta=0.8414  persistencia=0.9459   (0.3 min)
+  origen  5  omega=0.046482  alfa=0.1023  beta=0.8497  persistencia=0.9520   (0.3 min)
+  origen  6  omega=0.041135  alfa=0.0958  beta=0.8624  persistencia=0.9582   (0.3 min)
+  origen  7  omega=0.041467  alfa=0.0935  beta=0.8643  persistencia=0.9578   (0.3 min)
+  origen  8  omega=0.041542  alfa=0.0902  beta=0.8675  persistencia=0.9577   (0.4 min)
+  origen  9  omega=0.043027  alfa=0.0882  beta=0.8680  persistencia=0.9562   (0.4 min)
+  origen 10  omega=0.045466  alfa=0.0877  beta=0.8659  persistencia=0.9536   (0.5 min)
+  origen 11  omega=0.043398  alfa=0.0848  beta=0.8713  persistencia=0.9560   (0.4 min)
+
+persistencia: minimo 0.9015, maximo 0.9582
+redondeada a dos cifras: entre 0.90 y 0.96
+total 4.1 min
+
+El Anexo C dice «entre 0,90 y 0,96». Comparese con lo de arriba y
+corrijase el texto si no coincide.

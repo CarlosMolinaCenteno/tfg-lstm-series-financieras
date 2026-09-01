@@ -35,7 +35,7 @@ import sys
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 CAPS = RAIZ / "memoria" / "capitulos"
 
-# Orden real de lectura, tomado de mitfg.tex.
+# Orden real de lectura, tomado de cmolina_tfg.tex.
 ORDEN = ["resumen", "simbolos",
          "cap1-intro", "cap2-problema", "cap3-rnn", "cap4-gradiente",
          "cap5-lstm", "cap6-experimento", "cap7-conclusiones",
