@@ -48,6 +48,10 @@ FUENTES = {
     "Fama-1991": ("papers/The Journal of Finance - December 1991 - FAMA - Efficient Capital Markets  II.pdf", -1574),
     "Higham": ("papers/Catherine-F-Higham_Desmond-J-Higham.pdf", -859),
     "Hewamalage": ("papers/Hewamalage, Bergmeier and Bandara .pdf", -387),
+    # Conseguidos el 2026-09-01. Ojo con Schafer: el PDF es la version de
+    # revista (IJNS 2007), no la comunicacion de ICANN 2006.
+    "Schafer-2007": ("papers/Schafer-Zimmermann_RNNUniversalApproximators_IJNS-2007.pdf", -252),
+    "Harvey-1997": ("papers/Harvey-Leybourne-Newbold_TestingEqualityPredictionMSE_IJF-1997.pdf", -280),
 }
 
 SIN_PDF = {
@@ -68,12 +72,10 @@ SIN_PDF = {
     "Bollerslev-1986": "fuera de raw/; se cita a la obra entera",
     "Corsi-2009": "fuera de raw/; se cita a la obra entera",
     "Diebold-Mariano": "fuera de raw/; se cita a la obra entera",
-    "Harvey-1997": "fuera de raw/; se cita a la obra entera",
     # Los dos estan tras muro de pago y sin acceso institucional: no se han
     # podido leer. Lo que la memoria dice de su contenido va por la fuente
     # secundaria Jiang-2023, y la observacion obs:segunda-mano lo declara.
-    "Funahashi-1993": "tras muro de pago; contenido citado via Jiang-2023",
-    "Schafer-2006": "tras muro de pago; contenido citado via Jiang-2023",
+    "Funahashi-1993": "tras muro de pago, sin acceso por la UCM; su contenido se\n        cita via Jiang-2023 y la observacion obs:segunda-mano lo declara",
     "Jiang-2023": "el PDF de raw/ es la preimpresion de arXiv, de paginacion"
                   " distinta a la publicada; se cita por seccion",
     "Wolpert-1996": "fuera de raw/; se cita a la obra entera",
@@ -98,15 +100,13 @@ GLOBALES = {("anexoA-redes.tex", "Bishop"), ("anexoA-redes.tex", "Goodfellow"),
             ("cap6-experimento.tex", "Harvey-1997"),
             ("anexoC-protocolo.tex", "Diebold-Mariano"),
             ("anexoC-protocolo.tex", "Harvey-1997"),
-            # Cuatro fuentes que no se han podido abrir -- estan tras muro de
-            # pago y no hay copia en raw/ --, de modo que NO se les pone
-            # localizador: un ancla sin comprobar es peor que ninguna. Si
-            # algun dia se consiguen los PDF, se les anaden anclas y se
-            # quitan de aqui.
+            # Sin PDF, de modo que NO se les pone localizador: un ancla sin
+            # comprobar es peor que ninguna. Schafer-2007 aparece aqui solo
+            # por la cita conjunta del capitulo 7; en el Anexo A, donde se
+            # enuncia su teorema, si lleva ancla comprobada.
             ("cap7-conclusiones.tex", "Funahashi-1993"),
-            ("cap7-conclusiones.tex", "Schafer-2006"),
+            ("cap7-conclusiones.tex", "Schafer-2007"),
             ("anexoA-redes.tex", "Funahashi-1993"),
-            ("anexoA-redes.tex", "Schafer-2006"),
             ("cap4-gradiente.tex", "Bengio-1994"),
             ("cap5-lstm.tex", "Gers-2000")}
 
