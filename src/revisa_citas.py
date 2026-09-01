@@ -64,7 +64,10 @@ SIN_PDF = {
     # se citan por seccion o a la obra entera, y sus anclas no se pueden
     # comprobar aqui porque el PDF no esta en el repositorio.
     "Gers-2000": "tras muro de pago; se cita a la obra entera",
-    "Bengio-1994": "tras muro de pago; se cita a la obra entera",
+    # Sin copia legal en abierto: Unpaywall y Semantic Scholar lo dan como
+    # cerrado. No hace falta, porque el enunciado que la memoria usa va con
+    # el ancla de Goodfellow §10.7 p. 392, que si esta en raw/.
+    "Bengio-1994": "sin copia legal en abierto; el credito es suyo y el\n        enunciado va anclado a Goodfellow, como se hace con Wolpert",
     # Unica de las diez cuyo texto SI se ha podido abrir (PMLR, acceso
     # libre): sus dos localizadores estan verificados contra el PDF.
     "Pascanu-2013": "fuera de raw/; §2.1 y §3.2 verificados en el PDF de PMLR",
