@@ -69,8 +69,13 @@ SIN_PDF = {
     "Corsi-2009": "fuera de raw/; se cita a la obra entera",
     "Diebold-Mariano": "fuera de raw/; se cita a la obra entera",
     "Harvey-1997": "fuera de raw/; se cita a la obra entera",
-    "Funahashi-1993": "tras muro de pago; se cita a la obra entera",
-    "Schafer-2006": "tras muro de pago; se cita a la obra entera",
+    # Los dos estan tras muro de pago y sin acceso institucional: no se han
+    # podido leer. Lo que la memoria dice de su contenido va por la fuente
+    # secundaria Jiang-2023, y la observacion obs:segunda-mano lo declara.
+    "Funahashi-1993": "tras muro de pago; contenido citado via Jiang-2023",
+    "Schafer-2006": "tras muro de pago; contenido citado via Jiang-2023",
+    "Jiang-2023": "el PDF de raw/ es la preimpresion de arXiv, de paginacion"
+                  " distinta a la publicada; se cita por seccion",
     "Wolpert-1996": "fuera de raw/; se cita a la obra entera",
 }
 
